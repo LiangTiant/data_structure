@@ -1,0 +1,52 @@
+#利用栈完成二叉树的前序后序中序遍历：
+#前序遍历：
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        stack=[]
+        cur=root
+        result=[]
+        while (cur or stack):
+            if cur:
+                result.append(cur.val)
+                stack.append(cur)
+                cur=cur.left
+            else:
+                cur=stack.pop()
+                cur=cur.right
+
+        return result
+#中序遍历：
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        stack=[]
+        cur=root
+        result=[]
+        while (cur or stack):
+            if cur:
+                stack.append(cur)
+                cur=cur.left
+            else:
+                cur=stack.pop()
+                result.append(cur.val)
+                cur=cur.right
+
+        return result
+#后序遍历：
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        stack=[]
+        cur=root
+        result=[]
+        re=[]
+        while (cur or stack):
+            if cur:
+                stack.append(cur)
+                result.append(cur)
+                cur=cur.right
+            else:
+                cur=stack.pop()
+                cur=cur.left
+        while result:
+            node=result.pop()
+            re.append(node.val)
+        return re
