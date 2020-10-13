@@ -1,0 +1,20 @@
+#力扣475 供暖器
+class Solution:
+    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        heaters.sort()
+        ans=0
+#利用二分类实现寻找房屋右侧最接近的供暖器
+        for _ in houses:
+            left=0
+            right=len(heaters)-1
+            while left<right:
+                mid=(left+right)//2
+                if heaters[mid]>_:
+                    right=mid
+                else:
+                    left=mid+1
+            diatance_l=abs(heaters[right]-_)
+            diatance_r=abs(heaters[right-1]-_)
+            distance=min(diatance_r,diatance_l)
+            ans=max(distance,ans)
+        return ans
