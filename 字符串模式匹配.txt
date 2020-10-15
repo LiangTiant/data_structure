@@ -1,0 +1,29 @@
+#字符串匹配，模式匹配
+
+class Solution:
+def get_next(T,next):
+    i=0
+    next[i]=-1
+    j=-1
+    while i<len(T):
+        if j==-1 or T[i]==T[j]:
+            i+=1
+            j+=1
+            if i<len(T):
+                next[i]=j
+        else:
+            j=next[j]
+
+def Index_KMP(S,T,pos):
+    i=pos
+    j=0
+    while(i<len(S) and j<len(T)):
+        if j==-1 or S[i]==T[j]:
+            i+=1
+            j+=1
+        else:
+            j=next[j]
+    if j>=len(T):        
+        return i-len(T)
+    else:
+        return 0
