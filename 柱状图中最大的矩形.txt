@@ -1,0 +1,31 @@
+##leetcode 84
+
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        stack=[0]
+        left_pos=[-1]
+        for i in range(1,len(heights)):
+            while stack and heights[i]<=heights[stack[-1]]:
+                stack.pop()
+            if stack:
+                left_pos.append(stack[-1])
+            else:
+                left_pos.append(-1)
+            stack.append(i)
+
+        stack=[len(heights)-1]
+        right_pos=[len(heights)]
+        for j in range(len(heights)-2,-1,-1):
+            while stack and heights[j]<=heights[stack[-1]]:
+                stack.pop()
+            if stack:
+                right_pos.append(stack[-1])
+            else:
+                right_pos.append(len(heights))
+            stack.append(j)
+            
+        right_pos=right_pos[::-1] 
+        ans=0
+        for k in range(len(heights)):
+            ans=max(ans,heights[k]*(right_pos[k]-left_pos[k]-1))
+        return ans
