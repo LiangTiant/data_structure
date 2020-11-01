@@ -1,0 +1,38 @@
+#leetcode 面试题 17.21
+
+给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。
+
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的直方图，在这种情况下，可以接 6 个单位的水（蓝色部分表示水）。 
+
+题解：
+lass Solution:
+    def trap(self, height: List[int]) -> int:
+        if len(height)==0 or len(height)==1:
+            return 0
+        #由左向右
+        pos=0
+        max_height=0
+        stack=[]
+        result=0
+
+        while(pos<=len(height)-1):
+            while stack and height[pos]>max_height:
+                result+=max_height-stack.pop()
+            if stack==[]:   
+                max_height=height[pos]
+            stack.append(height[pos])
+            pos+=1
+
+        #由右向左        
+        stack=[]
+        max_height=0
+        pos=len(height)-1
+        while(pos>=0):
+            while stack and height[pos]>=max_height:
+                result+=max_height-stack.pop()
+            if stack==[]:
+                max_height=height[pos]
+            stack.append(height[pos])
+            pos-=1
+
+        return result
