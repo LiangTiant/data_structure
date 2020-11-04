@@ -1,0 +1,24 @@
+leetcode 面试题 17.10
+       数组中占比超过一半的元素称之为主要元素。给定一个整数数组，找到它的主要元素。若没有，返回-1。
+
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        if len(nums)==1:
+            return nums[0]
+        #覆盖存储
+        nums.sort()
+        length=1
+        max_length=1
+        result=-1
+        for i in range(1,len(nums)):
+            if nums[i]==nums[i-1]:
+                length+=1
+                if (length>max_length):
+                    result=nums[i]
+                    max_length=length
+            else:
+                length=1
+        if max_length>=len(nums)%2+len(nums)//2:
+            return result
+        return -1
