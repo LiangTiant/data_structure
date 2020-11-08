@@ -1,0 +1,35 @@
+PAT1001
+题目：Calculate a+b and output the sum in standard format -- that is, the digits must be separated into groups of three by commas (unless there are less than four digits).
+
+
+
+
+def calculate(a,b):
+    sum=abs(a+b)
+    if sum==0:
+        return 0
+    result=[]
+    while sum//1000!=0:
+        result.append(str(sum%10))
+        result.append(str(sum//10%10))
+        result.append(str(sum//100%10))
+        result.append(',')
+        sum=sum//1000
+    if sum%10:
+        result.append(str(sum%10))
+    if sum//10%10:
+        result.append(str(sum//10%10))
+    if sum//100%10:
+        result.append(str(sum // 100 % 10))
+    if (a+b)<0:
+        result.append('-')
+    return ''.join(result[::-1])
+
+
+def re():
+    a,b=input().split()
+    a=int(a)
+    b=int(b)
+    return calculate(a,b)
+
+print(re())
