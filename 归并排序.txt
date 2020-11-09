@@ -1,0 +1,35 @@
+归并排序：
+
+def Merge(SR,TR,i,m,n):
+    j=m+1
+    k=i
+    while (i<=m and j<=n):
+        if SR[i]<SR[j]:
+            TR[k]=SR[i]
+            i+=1
+        else:
+            TR[k]=SR[j]
+            j+=1
+        k+=1
+    if (i<=m):
+        for i in range(i,m+1):
+            TR[k]=SR[i]
+            k+=1
+    else:
+        for j in range(j,n+1):
+            TR[k]=SR[n]
+            k+=1
+
+def Msort(SR,TR1,s,t):
+    if (s==t):
+        TR1[s]=SR[s]
+    else:
+        mid=(s+t)//2
+        TR2=[0 for _ in SR]
+        Msort(SR,TR2,s,mid)#包括mid
+        Msort(SR,TR2,mid+1,t)
+        Merge(TR2,TR1,s,mid,t)
+
+nums=[int(_) for _ in input().split()]
+Msort(nums,nums,0,len(nums)-1)
+print(nums)
