@@ -16,6 +16,7 @@ class Solution:
     def isValid(self, s: str) -> bool:
         if len(s)==0 or (len(s)==1) or (len(s)==2) or (s[0]=='c'):
             return False
+        #利用栈存储数据，如果遇到'a'或'b'则压入栈中，否则查看是否符合情况。
         stack=[]
         stack.append(s[0])
         for i in range(1,len(s)):
