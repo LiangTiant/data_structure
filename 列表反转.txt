@@ -1,0 +1,40 @@
+#leetcode 剑指24
+定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        pre=None
+        while head:
+            Next=head.next
+            head.next=pre
+            pre=head
+            head=Next
+        return pre
+
+递归：
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head==None or head.next==None:
+            return head
+        R=Solution.reverseList(self,head.next)
+        head.next.next=head
+        head.next=None
+        return R
+
+栈：
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head==None:
+            return head
+        stack=[]
+        while head:
+            stack.append(head.val)
+            head=head.next
+        if stack:
+            head=ListNode(stack.pop())
+            r=head
+        while stack:
+            node=ListNode(stack.pop())
+            head.next=node
+            head=node
+        return r
